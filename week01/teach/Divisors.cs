@@ -17,8 +17,22 @@ public static class Divisors {
     /// <param name="number">The number to find the divisor</param>
     /// <returns>List of divisors</returns>
     private static List<int> FindDivisors(int number) {
+        int divisor = 2;
+        int quotient = number / divisor;
         List<int> results = new();
-        // TODO problem 1
+        
+        results.Add(1);
+
+        do {
+            if (number % divisor == 0) {
+                results.Add(divisor);
+                results.Add(quotient);
+            }
+            divisor++;
+            quotient = number / divisor;
+        } while (divisor < quotient);
+        
+        results.Sort();
         return results;
     }
 }
