@@ -23,7 +23,7 @@ public static class SetsAndMaps
     {
         HashSet<string> wordSet = new HashSet<string>(words);
         List<string> pairs = new List<string>();
-        
+
         foreach (var word in wordSet)
         {
             string reversedWord = new string(new char[] { word[1], word[0] });
@@ -56,7 +56,7 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            
+
             fields[3] = fields[3].Trim();
 
             if (degrees.ContainsKey(fields[3]))
@@ -92,18 +92,29 @@ public static class SetsAndMaps
     {
         word1 = word1.Replace(" ", "").ToLower();
         word2 = word2.Replace(" ", "").ToLower();
-        char[] chars = word1.ToCharArray();
-        char[] char2 = word2.ToCharArray();
-        
-        Array.Sort(chars);
-        Array.Sort(char2);
 
-        if (new string(chars) == new string(char2))
+        if (word1.Length != word2.Length)
+            return false;
+
+        var counts = new Dictionary<char, int>();
+
+        foreach (char c in word1)
         {
-            return true;
+            counts[c] = counts.GetValueOrDefault(c) + 1;
         }
 
-        return false;
+        foreach (char c in word2)
+        {
+            if (!counts.ContainsKey(c)) 
+                return false;
+
+            counts[c]--;
+
+            if (counts[c] == 0)
+                counts.Remove(c);
+        }
+
+        return counts.Count == 0;
     }
 
     /// <summary>
@@ -137,6 +148,19 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
+
+        if (featureCollection != null)
+        {
+            List<string> summaries = new List<string>();
+            foreach (var feature in featureCollection.Features)
+            {
+                string place = feature.Properties.Place;
+                double magnitude = feature.Properties.Mag;
+                summaries.Add($"{place} - Mag {magnitude}");
+            }
+            return summaries.ToArray();
+        }
+
         return [];
     }
 }
