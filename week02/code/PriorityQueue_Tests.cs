@@ -6,9 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
+    // Scenario: Try to enqueue a single item
+    // Expected Result: Count is 1
+    // Test Results: All tests passed.
+    // Defect(s) Found: None
     public void TestPriorityQueue_1()
     {
         var priorityQueue = new PriorityQueue();
@@ -17,9 +18,10 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
+    // Scenario: Try to enqueue and dequeue a single item
+    // Expected Result: Count is 1, Dequeue returns the item, and Count is 0 after dequeue
+    // Test Results: It wasn't returning the same item, passed after fixing the dequeue method.
+    // Defect(s) Found: None
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
@@ -30,9 +32,10 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found:
+    // Scenario: Enqueue items with different priorities and dequeue them
+    // Expected Result: Items are dequeued in priority order (highest priority first)
+    // Test Results: Passed since the items were iterated from back to front.
+    // Defect(s) Found: None
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
@@ -44,7 +47,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Dequeue from an empty queue
     // Expected Result: InvalidOperationException is thrown with message "The queue is empty."
-    // Defect(s) Found:
+    // Defect(s) Found: None
     public void TestPriorityQueue_4()
     {
         var priorityQueue = new PriorityQueue();
