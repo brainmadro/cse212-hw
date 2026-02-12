@@ -48,6 +48,22 @@ public static class Trees
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
-        // TODO Start Problem 5
+        if (sortedNumbers.Length == 0)
+            return;
+
+        if (last - 1 <= first)
+        {
+            bst.Insert(sortedNumbers[first]);
+            bst.Insert(sortedNumbers[last]);
+            return;
+        }
+        
+        int nextIndex2Insert = ((last - first) / 2) + first;
+
+        bst.Insert(sortedNumbers[nextIndex2Insert]);
+        InsertMiddle(sortedNumbers, first, nextIndex2Insert - 1, bst);
+        InsertMiddle(sortedNumbers, nextIndex2Insert + 1, last, bst);
+
+
     }
 }
